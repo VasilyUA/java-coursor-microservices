@@ -21,15 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/roles")
 @RequiredArgsConstructor
-@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, bearerFormat = "JWT", scheme = "bearer", in = SecuritySchemeIn.HEADER)
 public class RoleController {
 
     private final RoleService roleService;
 
 
     @PostMapping
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<RoleDTO> createRole(@RequestBody CreateRoleDTO createRoleDTO) {
             RoleDTO roleDTO = roleService.createRole(createRoleDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(roleDTO);
@@ -37,8 +34,6 @@ public class RoleController {
 
 
     @PutMapping("/{roleId}")
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<RoleDTO> updateRole(@PathVariable Long roleId, @RequestBody UpdateRoleDTO updateRoleDTO) throws JsonMappingException {
             RoleDTO roleDTO = roleService.updateRole(roleId, updateRoleDTO);
             return ResponseEntity.ok(roleDTO);
@@ -46,24 +41,18 @@ public class RoleController {
 
 
     @GetMapping("/{roleId}")
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<RoleDTO> getRole(@PathVariable Long roleId) {
             RoleDTO roleDTO = roleService.getRole(roleId);
             return ResponseEntity.ok(roleDTO);
     }
 
     @GetMapping
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
             List<RoleDTO> roles = roleService.getAllRoles();
             return ResponseEntity.ok(roles);
     }
 
     @DeleteMapping("/{roleId}")
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<String> deleteRole(@PathVariable Long roleId) {
             roleService.deleteRole(roleId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{\"message\": \"Role with id: " + roleId + " was deleted\"}");
@@ -71,8 +60,6 @@ public class RoleController {
 
 
     @PostMapping("/{roleId}/users/{userId}")
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<RoleWithUsersDTO> addRoleToUser(@PathVariable Long roleId, @PathVariable Long userId) {
             RoleWithUsersDTO roleWithUsersDTO = roleService.addRoleToUser(roleId, userId);
             return ResponseEntity.ok(roleWithUsersDTO);
@@ -80,8 +67,6 @@ public class RoleController {
 
 
     @DeleteMapping("/{roleId}/users/{userId}")
-    @SecurityRequirement(name = "jwt")
-    @Operation(security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<RoleWithUsersDTO> removeRoleForUser(@PathVariable Long roleId, @PathVariable Long userId) {
             RoleWithUsersDTO roleWithUsersDTO = roleService.removeRoleForUser(roleId, userId);
             return ResponseEntity.ok(roleWithUsersDTO);
