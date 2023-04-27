@@ -25,7 +25,7 @@ public class RoleService {
     public RoleDTO createRole(CreateRoleDTO createRoleDTO) {
         Role existingRole = roleRepo.findByName(createRoleDTO.getName());
         if (existingRole != null) {
-            throw new NotFoundException("Role already exists with name: " + createRoleDTO.getName());
+            throw new ResourceExistsException("Role already exists with name: " + createRoleDTO.getName());
         }
 
         Role role = objectMapper.convertValue(createRoleDTO, Role.class);

@@ -8,10 +8,7 @@
 docker-compose up -d
 
 # Run a one service
-docker-compose run -d <service-name>
-
-# Run a two service
-docker-compose run -d <service-name-1> <service-name-2>
+docker-compose up -d <service-name>
 ```
 
 #### Services:

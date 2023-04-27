@@ -20,8 +20,8 @@ WORKDIR /usr/src/app
 RUN gradle build -x test
 
 # Сетим порт для з'єднання з мікросервісом
-EXPOSE 5000
+EXPOSE 5001
 
 # Запустіть jar-файл вашого проекту
-CMD ["java", "-jar", "build/libs/securitu-service-0.1.0.jar", "--spring.profiles.active=docker"]
+CMD ["java", "-jar", "build/libs/no-sql-service-0.1.0.jar", "--spring.profiles.active=docker"]
 

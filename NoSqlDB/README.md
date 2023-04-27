@@ -1,6 +1,5 @@
 # NoSqlDbApplication
 
-
 ### Cursor current task HW #16 - NoSql DB:
 ```
 Створити User Document (id, firstName, LastName, email, age, isMarried)
@@ -12,4 +11,16 @@
 - Вивести всіх одружених
 
 Також всі ці операції виконати через mongosh i додати в дз файл.
+```
+
+#### Run mongosh example:
+```bash
+# docker exec -it <container name> mongosh -u <root-user> -p <password> --authenticationDatabase admin <YUUR DB NAME>:
+docker exec -it ce48ce7c1199 mongosh -u root -p 55555 --authenticationDatabase admin NoSqlDB
+```
+
+#### Run mongosh example for check:
+```bash
+# don't forget to run docker-compose up -d before:
+bash ./NoSqlDB/mongo_commands.sh
 ```

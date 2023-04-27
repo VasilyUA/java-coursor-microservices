@@ -7,6 +7,7 @@ import com.example.security.dtos.auth.output.AuthenticationResponseDTO;
 import com.example.security.dtos.auth.input.RegistrationRequestDTO;
 import com.example.security.entitys.Role;
 import com.example.security.entitys.User;
+import com.example.security.exceptions.ResourceExistsException;
 import com.example.security.repositories.RoleRepo;
 import com.example.security.repositories.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +31,10 @@ public class AuthenticationService {
     private final ObjectMapper objectMapper;
 
     public AuthenticationResponseDTO register(RegistrationRequestDTO request) {
+        if (repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new ResourceExistsException("User already exists with email: " + request.getEmail());
+        }
+
         var user = objectMapper.convertValue(request, User.class);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         var existingRole = roleRepo.findByName("ROLE_USER");

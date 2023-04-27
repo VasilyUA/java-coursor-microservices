@@ -11,4 +11,9 @@ public class HealthyController {
     public ResponseEntity<String> healthy() {
         return ResponseEntity.ok("{\"status\":\"ok\"}");
     }
+
+    @GetMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> api() {
+        return ResponseEntity.ok("{\"status\":\"ok\"}");
+    }
 }

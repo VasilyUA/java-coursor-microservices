@@ -23,6 +23,11 @@ public class UserService {
     private final ObjectMapper objectMapper;
 
     public UserDTO createUser(CreateUserDTO createUserDTO) {
+
+        if (userRepo.findByEmail(createUserDTO.getEmail()).isPresent()) {
+            throw new ResourceExistsException("User already exists with email: " + createUserDTO.getEmail());
+        }
+
         User user = objectMapper.convertValue(createUserDTO, User.class);
         Role defaultRole = roleRepo.findByName("ROLE_USER");
         if (defaultRole == null) {

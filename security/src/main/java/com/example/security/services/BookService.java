@@ -7,6 +7,7 @@ import com.example.security.dtos.user.output.UserDTO;
 import com.example.security.entitys.Book;
 import com.example.security.entitys.User;
 import com.example.security.exceptions.NotFoundException;
+import com.example.security.exceptions.ResourceExistsException;
 import com.example.security.repositories.BookRepo;
 import com.example.security.repositories.UserRepo;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,7 +32,7 @@ public class BookService {
 
         Book existingBook = bookRepo.findByTitle(createBookDTO.getTitle());
         if (existingBook != null) {
-            throw new NotFoundException("Book already exists with title: " + createBookDTO.getTitle());
+            throw new ResourceExistsException("Book already exists with title: " + createBookDTO.getTitle());
         }
 
         Book book = objectMapper.convertValue(createBookDTO, Book.class);

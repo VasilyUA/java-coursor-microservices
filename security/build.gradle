@@ -18,8 +18,9 @@ configurations {
 	}
 }
 
+// Name jar file and version
 bootJar {
-	archiveBaseName = 'my-app'
+	archiveBaseName = 'securitu-service'
 	archiveVersion = '0.1.0'
 }
 

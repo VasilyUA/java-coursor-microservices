@@ -14,3 +14,8 @@
 
 В  swagger- ui додати можливість передачі jwt токена, щоб мати доступ в свагері до секюрних ендроінтів
 ```
+
+#### For run mysql bash need run command:
+```bash
+docker exec -it mysqldb mysql -u root -p
+```
