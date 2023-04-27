@@ -26,6 +26,7 @@ public class OpenApiConfig {
                         .addPathItem("/api", unsecuredEndpoint(PathItem.HttpMethod.GET, "200"))
                         .addPathItem("/api/auth/register", unsecuredEndpoint(PathItem.HttpMethod.POST, "201"))
                         .addPathItem("/api/auth/authenticate", unsecuredEndpoint(PathItem.HttpMethod.POST, "200"))
+                        .addPathItem("/api/health-no-sql-endpoint", unsecuredEndpoint(PathItem.HttpMethod.GET, "200"))
                 );
     }
 
