@@ -1,6 +1,6 @@
-# Cursor current Task:
+# Cursor current task HW #(13,14,15) - Spring Security + Validation + Swagger:
 
-```agsl
+```
 Зробити Rest API для book entity + validation
 
 Додати swagger API
