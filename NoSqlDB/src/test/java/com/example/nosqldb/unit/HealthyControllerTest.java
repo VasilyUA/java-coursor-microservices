@@ -21,13 +21,13 @@ public class HealthyControllerTest {
     void healthyTest() {
         ResponseEntity<String> response = healthyController.healthy();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("{\"status\":\"ok\"}", response.getBody());
+        assertEquals("{\"statusNoSqlDbApplication\":\"ok\"}", response.getBody());
     }
 
     @Test
     void apiTest() {
         ResponseEntity<String> response = healthyController.api();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("{\"status\":\"ok\"}", response.getBody());
+        assertEquals("{\"statusNoSqlDbApplicationApi\":\"ok\"}", response.getBody());
     }
 }

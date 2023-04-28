@@ -14,7 +14,7 @@ public class ApiHealthController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> healthyApi() {
-        return ResponseEntity.ok("{\"status\":\"ok\"}");
+        return ResponseEntity.ok("{\"statusSecurityApplicationApi\":\"ok\"}");
     }
 
     @GetMapping("/health-no-sql-endpoint")

@@ -29,14 +29,14 @@ public class ApiHealthControllerTest {
     void testHealthyApi() {
         ResponseEntity<String> response = controller.healthyApi();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("{\"status\":\"ok\"}", response.getBody());
+        assertEquals("{\"statusSecurityApplicationApi\":\"ok\"}", response.getBody());
     }
 
     @Test
     void testGetDataFromRemoteService() {
-        when(noSQLService.healthy()).thenReturn(new ResponseEntity<>("{\"status\":\"ok\"}", HttpStatus.OK));
+        when(noSQLService.healthy()).thenReturn(new ResponseEntity<>("{\"statusNoSqlDbApplication\":\"ok\"}", HttpStatus.OK));
         ResponseEntity<String> response = controller.getDataFromRemoteService();
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("{\"status\":\"ok\"}", response.getBody());
+        assertEquals("{\"statusNoSqlDbApplication\":\"ok\"}", response.getBody());
     }
 }

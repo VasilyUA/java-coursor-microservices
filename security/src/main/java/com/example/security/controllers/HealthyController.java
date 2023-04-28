@@ -9,6 +9,6 @@ public class HealthyController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> healthy() {
-            return ResponseEntity.ok("{\"status\":\"ok\"}");
+            return ResponseEntity.ok("{\"statusSecurityApplication\":\"ok\"}");
     }
 }

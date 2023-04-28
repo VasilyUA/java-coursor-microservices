@@ -9,11 +9,11 @@ public class HealthyController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> healthy() {
-        return ResponseEntity.ok("{\"status\":\"ok\"}");
+        return ResponseEntity.ok("{\"statusNoSqlDbApplication\":\"ok\"}");
     }
 
     @GetMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> api() {
-        return ResponseEntity.ok("{\"status\":\"ok\"}");
+        return ResponseEntity.ok("{\"statusNoSqlDbApplicationApi\":\"ok\"}");
     }
 }
