@@ -3,7 +3,8 @@ package com.example.nosqldb.dtos.user.input;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCreateDTO {
@@ -14,8 +15,8 @@ public class UserCreateDTO {
     @NotBlank
     @Email(message = "Email should be valid")
     private String email;
-    @NotBlank
+    @NotNull
     private int age;
-    @NotBlank
+    @NotNull
     private boolean isMarried;
 }

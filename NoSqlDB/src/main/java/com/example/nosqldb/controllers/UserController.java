@@ -1,6 +1,5 @@
 package com.example.nosqldb.controllers;
 
-import com.example.nosqldb.documents.User;
 import com.example.nosqldb.dtos.user.input.UserCreateDTO;
 import com.example.nosqldb.dtos.user.input.UserUpdateDTO;
 import com.example.nosqldb.dtos.user.output.UserDTO;
@@ -9,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO user) {
+    public ResponseEntity<UserDTO> createUser(@Validated @RequestBody UserCreateDTO user) {
         UserDTO createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable ObjectId id, @RequestBody UserUpdateDTO updatedUser) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable ObjectId id, @Validated @RequestBody UserUpdateDTO updatedUser) {
         var user = userService.updateUser(id, updatedUser);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }

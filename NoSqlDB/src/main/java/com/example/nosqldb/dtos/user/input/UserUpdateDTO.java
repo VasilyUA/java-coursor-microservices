@@ -3,7 +3,8 @@ package com.example.nosqldb.dtos.user.input;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserUpdateDTO {

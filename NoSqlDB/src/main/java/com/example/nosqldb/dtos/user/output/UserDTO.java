@@ -3,7 +3,8 @@ package com.example.nosqldb.dtos.user.output;
 import lombok.*;
 import org.bson.types.ObjectId;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {

@@ -2,6 +2,7 @@ package com.example.nosqldb.integrations;
 
 import com.example.nosqldb.configs.MongoTestConfiguration;
 import com.example.nosqldb.documents.User;
+import com.example.nosqldb.dtos.user.input.UserCreateDTO;
 import com.example.nosqldb.dtos.user.input.UserUpdateDTO;
 import com.example.nosqldb.dtos.user.output.UserDTO;
 import com.example.nosqldb.repository.UserRepo;
@@ -55,6 +56,18 @@ public class UserControllerTest {
     }
 
     @Test
+    void createUserInvalidRequestTest() throws Exception {
+        UserCreateDTO invalidUser = new UserCreateDTO("", "", "invalidemail", 25, false);
+
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUser)))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.email").value("Email should be valid"));
+    }
+
+
+    @Test
     void createUserTest() throws Exception {
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -70,6 +83,24 @@ public class UserControllerTest {
         Assertions.assertThat(userFromDb).isNotNull();
         Assertions.assertThat(userFromDb.getFirstName()).isEqualTo(user.getFirstName());
     }
+
+    @Test
+    void createUserWithExistingEmailTest() throws Exception {
+        userRepo.save(user);
+
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isConflict());
+    }
+
+
+    @Test
+    void getUserByEmailNotFoundTest() throws Exception {
+        mockMvc.perform(get("/api/users/email/{email}", "notfound.email@example.com"))
+                .andExpect(status().isNotFound());
+    }
+
 
     @Test
     void getAllUsersTest() throws Exception {
@@ -125,6 +156,16 @@ public class UserControllerTest {
     }
 
     @Test
+    void updateUserNotFoundTest() throws Exception {
+        UserUpdateDTO updatedUser = new UserUpdateDTO("Updated", "User", "updated.user@example.com", 30, true);
+
+        mockMvc.perform(put("/api/users/{id}", new ObjectId().toHexString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedUser)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void getUsersByFirstNameTest() throws Exception {
         userRepo.save(user);
 
@@ -175,5 +216,12 @@ public class UserControllerTest {
         Assertions.assertThat(userRepo.findById(savedUser.getId())).isEmpty();
     }
 
+    @Test
+    void deleteUserNotFoundTest() throws Exception {
+        ObjectId nonExistentId = new ObjectId();
+
+        mockMvc.perform(delete("/api/users/{id}", nonExistentId.toHexString()))
+                .andExpect(status().isNotFound());
+    }
 
 }
