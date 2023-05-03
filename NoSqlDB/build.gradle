@@ -51,10 +51,13 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:testcontainers:1.16.3'
 	testImplementation 'org.testcontainers:mongodb:1.16.3'
+	testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.35.0"
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
@@ -73,11 +76,12 @@ jacocoTestReport {
 	}
 
 	reports {
-		xml.enabled true
-		csv.enabled false
-		html.destination file("${buildDir}/jacocoHtml")
+		xml.required = true
+		csv.required = true
+		html.outputLocation.set(layout.buildDirectory.dir("customJacocoReportDir"))
 	}
 }
+
 
 
 jacocoTestCoverageVerification {

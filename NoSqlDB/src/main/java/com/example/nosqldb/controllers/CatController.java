@@ -13,7 +13,7 @@ public class CatController {
     @Autowired
     private CatServiceClient catServiceClient;
 
-    @GetMapping(value = "api/cat/fact", produces =  MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "cat/fact", produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getCatFact() {
         return catServiceClient.getCatFact();
     }
