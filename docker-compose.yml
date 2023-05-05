@@ -31,7 +31,7 @@ services:
 
   NoSqlApplication:
     depends_on:
-      - MongoDB
+      - MongoExpress
     build: ./NoSqlDB
     image: nosql-app
     container_name: nosql-app
