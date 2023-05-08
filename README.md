@@ -9,6 +9,9 @@ docker-compose up -d
 
 # Run a one service
 docker-compose up -d <service-name>
+
+# To start several instances of the service, you can run the following command:
+docker-compose up --scale <service-name>=<number-of-instances> -d
 ```
 
 #### Services:
