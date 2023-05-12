@@ -6,14 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-@ConditionalOnProperty(name = "cors.configuration.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "app.cors.configuration.enabled", havingValue = "true")
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(@NotNull CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*");
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 }

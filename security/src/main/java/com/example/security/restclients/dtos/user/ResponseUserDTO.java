@@ -1,4 +1,4 @@
-package com.example.nosqldb.dtos.user.output;
+package com.example.security.restclients.dtos.user;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class ResponseUserDTO {
     private String id;
     private String firstName;
     private String lastName;

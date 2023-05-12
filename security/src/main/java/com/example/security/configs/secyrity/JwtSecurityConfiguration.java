@@ -56,7 +56,7 @@ public class JwtSecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/api/auth/**", "/docs/**", "/swagger-ui/**", "/api", "/api/health-no-sql-endpoint")
+                .requestMatchers("/", "/api/auth/**", "/docs/**", "/swagger-ui/**", "/api", "/api/user-nosql-service/**")
                 .permitAll()
                 .requestMatchers("/api/roles/**", "/api/user/{userId}/books").hasRole("USER")
                 .requestMatchers("/api/roles/**", "/api/user/**").hasRole("ADMIN")

@@ -8,7 +8,6 @@ import com.example.nosqldb.dtos.user.output.UserDTO;
 import com.example.nosqldb.repository.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,7 +45,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        user = new User(new ObjectId(), "John", "Doe", "john.doe@example.com", 25, false);
+        user = new User("asdfasdfqwet", "John", "Doe", "john.doe@example.com", 25, false);
         userDTO = new UserDTO(user.getId(), "John", "Doe", "john.doe@example.com", 25, false);
     }
 
@@ -144,7 +143,7 @@ public class UserControllerTest {
         User savedUser = userRepo.save(user);
         UserUpdateDTO updatedUser = new UserUpdateDTO("Updated", "User", "updated.user@example.com", 30, true);
 
-        mockMvc.perform(put("/api/users/{id}", savedUser.getId().toHexString())
+        mockMvc.perform(put("/api/users/{id}", savedUser.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedUser)))
                 .andExpect(status().isOk())
@@ -159,7 +158,7 @@ public class UserControllerTest {
     void updateUserNotFoundTest() throws Exception {
         UserUpdateDTO updatedUser = new UserUpdateDTO("Updated", "User", "updated.user@example.com", 30, true);
 
-        mockMvc.perform(put("/api/users/{id}", new ObjectId().toHexString())
+        mockMvc.perform(put("/api/users/{id}", "asdfasdfqwet")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedUser)))
                 .andExpect(status().isNotFound());
@@ -210,7 +209,7 @@ public class UserControllerTest {
     void deleteUserTest() throws Exception {
         User savedUser = userRepo.save(user);
 
-        mockMvc.perform(delete("/api/users/{id}", savedUser.getId().toHexString()))
+        mockMvc.perform(delete("/api/users/{id}", savedUser.getId()))
                 .andExpect(status().isNoContent());
 
         Assertions.assertThat(userRepo.findById(savedUser.getId())).isEmpty();
@@ -218,9 +217,7 @@ public class UserControllerTest {
 
     @Test
     void deleteUserNotFoundTest() throws Exception {
-        ObjectId nonExistentId = new ObjectId();
-
-        mockMvc.perform(delete("/api/users/{id}", nonExistentId.toHexString()))
+        mockMvc.perform(delete("/api/users/{id}", "asdfasdfqwet"))
                 .andExpect(status().isNotFound());
     }
 

@@ -16,4 +16,9 @@ public class HealthyController {
     public ResponseEntity<String> api() {
         return ResponseEntity.ok("{\"statusNoSqlDbApplicationApi\":\"ok\"}");
     }
+
+    @GetMapping(value = "/api/info", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> apiInfo() {
+        return ResponseEntity.ok("{\"statusNoSqlDbApplicationApiInfo\":\"ok\"}");
+    }
 }

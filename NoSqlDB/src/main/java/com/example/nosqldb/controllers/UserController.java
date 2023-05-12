@@ -4,7 +4,6 @@ import com.example.nosqldb.dtos.user.input.UserCreateDTO;
 import com.example.nosqldb.dtos.user.input.UserUpdateDTO;
 import com.example.nosqldb.dtos.user.output.UserDTO;
 import com.example.nosqldb.services.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,9 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
+        System.out.println("UserController.getAllUsers(1)");
         List<UserDTO> users = userService.getAllUsers();
+        System.out.println("UserController.getAllUsers(2)" + users);
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
     @GetMapping("/email/{email}")
@@ -62,13 +63,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable ObjectId id, @Validated @RequestBody UserUpdateDTO updatedUser) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @Validated @RequestBody UserUpdateDTO updatedUser) {
         var user = userService.updateUser(id, updatedUser);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable ObjectId id) {
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User deleted successfully");
     }

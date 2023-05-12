@@ -8,7 +8,6 @@ import com.example.nosqldb.exceptions.NotFoundException;
 import com.example.nosqldb.exceptions.ResourceExistsException;
 import com.example.nosqldb.repository.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +69,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDTO updateUser(ObjectId id, UserUpdateDTO userUpdateDTO) {
+    public UserDTO updateUser(String id, UserUpdateDTO userUpdateDTO) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
         user.setFirstName(userUpdateDTO.getFirstName());
@@ -81,7 +80,7 @@ public class UserService {
         return convertToDto(userRepo.save(user));
     }
 
-    public void deleteUser(ObjectId id) {
+    public void deleteUser(String id) {
         if (!userRepo.existsById(id)) {
             throw new NotFoundException("User not found with id: " + id);
         }
