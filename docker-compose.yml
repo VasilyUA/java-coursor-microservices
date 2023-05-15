@@ -93,6 +93,7 @@ services:
       - MONGO_INITDB_DATABASE=NoSqlDB
     volumes:
       - ./database/data-mongodb:/data/db
+      - ./configs/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     networks:
       - app
 
