@@ -1,8 +1,9 @@
 package com.example.apachekafka.controllers;
 
-import com.example.apachekafka.dtos.news.News;
+import com.example.apachekafka.dtos.news.NewsDTO;
 import com.example.apachekafka.kafka.produsers.NewsProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,9 @@ public class NewsController {
     private NewsProducer newsProducer;
 
     @PostMapping
-    public String createNews(@RequestBody News news) {
-        newsProducer.sendNews(news);
-        return "News created";
+    public String createNews(@Validated @RequestBody NewsDTO newsDTO) {
+        newsProducer.sendNews(newsDTO);
+        return "News produced";
     }
 
 }

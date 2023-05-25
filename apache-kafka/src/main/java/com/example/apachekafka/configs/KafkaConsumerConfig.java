@@ -1,6 +1,5 @@
 package com.example.apachekafka.configs;
 
-import com.example.apachekafka.dtos.users.User;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

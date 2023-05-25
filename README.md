@@ -17,8 +17,10 @@ docker-compose up --scale <service-name>=<number-of-instances> -d
 #### Services:
 1. [Security service](./security)
 2. [NoSQL service](./NoSqlDB)
+3. [ApacheKafka service](./apache-kafka)
 
 #### Documentation `README.md` for services:
 1. [Security service](./security/README.md)
 2. [NoSQL service](./NoSqlDB/README.md)
+3. [ApacheKafka service](./apache-kafka/README.md)
 

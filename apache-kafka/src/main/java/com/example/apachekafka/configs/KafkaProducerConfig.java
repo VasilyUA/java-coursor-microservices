@@ -1,7 +1,7 @@
 package com.example.apachekafka.configs;
 
-import com.example.apachekafka.dtos.news.News;
-import com.example.apachekafka.dtos.users.User;
+import com.example.apachekafka.dtos.news.NewsDTO;
+import com.example.apachekafka.dtos.users.UserDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,7 @@ public class KafkaProducerConfig {
     private String bootstrapServers;
 
     @Bean
-    public ProducerFactory<String, User> userProducerFactory() {
+    public ProducerFactory<String, UserDTO> userProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -31,12 +31,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplate() {
+    public KafkaTemplate<String, UserDTO> kafkaTemplate() {
         return new KafkaTemplate<>(userProducerFactory());
     }
 
     @Bean
-    public ProducerFactory<String, News> newsProducerFactory() {
+    public ProducerFactory<String, NewsDTO> newsProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -45,7 +45,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, News> newsKafkaTemplate() {
+    public KafkaTemplate<String, NewsDTO> newsKafkaTemplate() {
         return new KafkaTemplate<>(newsProducerFactory());
     }
 }
